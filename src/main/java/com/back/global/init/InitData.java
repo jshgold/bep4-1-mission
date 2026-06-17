@@ -1,5 +1,6 @@
 package com.back.global.init;
 
+import com.back.domain.member.entity.Member;
 import com.back.domain.member.service.MemberService;
 import com.back.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class InitData {
     ApplicationRunner initDataApplicationRunner() {
         return args -> {
             self.work1();
+            self.work2();
         };
     }
 
@@ -40,11 +42,14 @@ public class InitData {
     @Transactional
     public void work2() {
         if(postService.count() > 0) return;
-        postService.initCreate("user1의 회고록 1번", "첫번째 프로젝트");
-        postService.initCreate("user1의 회고록 2번", "두번째 프로젝트");
-        postService.initCreate("user1의 회고록 3번", "세번째 프로젝트");
-        postService.initCreate("user2의 회고록 1번", "첫번째 프로젝트");
-        postService.initCreate("user2의 회고록 2번", "두번째 프로젝트");
-        postService.initCreate("user3의 회고록 1번", "세번째 프로젝트");
+        Member author1 = memberService.findByReferenceId(4L);
+        Member author2 = memberService.findByReferenceId(5L);
+        Member author3 = memberService.findByReferenceId(6L);
+        postService.create("user1의 회고록 1번", "첫번째 프로젝트", author1);
+        postService.create("user1의 회고록 2번", "두번째 프로젝트", author1);
+        postService.create("user1의 회고록 3번", "세번째 프로젝트", author1);
+        postService.create("user2의 회고록 1번", "첫번째 프로젝트", author2);
+        postService.create("user2의 회고록 2번", "두번째 프로젝트", author2);
+        postService.create("user3의 회고록 1번", "세번째 프로젝트", author3);
     }
 }

@@ -29,5 +29,9 @@ public class MemberService {
         return cnt;
     }
 
+    public Member findByReferenceId(Long id) {
+        return memberRepository.getReferenceById(id);
+    }
+
 
 }
