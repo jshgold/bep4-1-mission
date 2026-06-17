@@ -1,0 +1,12 @@
+spring:
+  application:
+    name:back
+  profiles:
+    active: dev
+  datasource:
+    hikari:
+      auto-commit: false
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update

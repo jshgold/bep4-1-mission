@@ -1,6 +1,7 @@
 package com.back.domain.member.entity;
 
 import com.back.global.entity.BaseEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,9 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Member extends BaseEntity {
-    String userName;
-    String password;
-    String nickName;
+    @Column(nullable = false, unique = true)
+    private String userName;
+    @Column(nullable = false)
+    private String password;
+    @Column(nullable = false)
+    private String nickName;
 
     public static Member initCreate(String userName,String nickName) {
         Member member = create(userName, nickName, "1234");

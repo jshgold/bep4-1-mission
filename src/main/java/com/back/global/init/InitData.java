@@ -26,7 +26,7 @@ public class InitData {
 
     @Transactional
     public void work1() {
-        if(memberService.count() >= 0) return;
+        if(memberService.count() > 0) return;
         memberService.initCreate("system","시스템");
         memberService.initCreate("holding","홀딩");
         memberService.initCreate("admin","관리자");
