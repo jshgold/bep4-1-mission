@@ -34,4 +34,9 @@ public class InitData {
         memberService.initCreate("user2","사용자2");
         memberService.initCreate("user3","사용자3");
     }
+
+    @Transactional
+    public void work2() {
+        if(false) return;
+    }
 }
