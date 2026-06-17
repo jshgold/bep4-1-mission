@@ -1,6 +1,7 @@
 package com.back.global.init;
 
 import com.back.domain.member.service.MemberService;
+import com.back.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
@@ -16,6 +17,7 @@ public class InitData {
     @Lazy
     private InitData self;
     private final MemberService memberService;
+    private final PostService postService;
 
     @Bean
     ApplicationRunner initDataApplicationRunner() {
@@ -37,6 +39,12 @@ public class InitData {
 
     @Transactional
     public void work2() {
-        if(false) return;
+        if(postService.count() > 0) return;
+        postService.initCreate("user1의 회고록 1번", "첫번째 프로젝트");
+        postService.initCreate("user1의 회고록 2번", "두번째 프로젝트");
+        postService.initCreate("user1의 회고록 3번", "세번째 프로젝트");
+        postService.initCreate("user2의 회고록 1번", "첫번째 프로젝트");
+        postService.initCreate("user2의 회고록 2번", "두번째 프로젝트");
+        postService.initCreate("user3의 회고록 1번", "세번째 프로젝트");
     }
 }
