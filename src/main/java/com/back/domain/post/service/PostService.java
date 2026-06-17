@@ -1,5 +1,6 @@
 package com.back.domain.post.service;
 
+import com.back.domain.member.entity.Member;
 import com.back.domain.post.entity.Post;
 import com.back.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,18 +12,11 @@ public class PostService {
     private final PostRepository postRepository;
 
 
-    public void create() {
-        String userName = "";
-        String password = "";
-        String nickname = "";
-        Post member = Post.create(userName, nickname, password);
-        Post result = postRepository.save(member);
+    public void create(String title, String content, Member author) {
+        Post post = Post.create(title, content, author);
+        Post result = postRepository.save(post);
     }
 
-    public void initCreate(String userName, String nickname) {
-        Post member = Post.initCreate(userName, nickname);
-        Post result = postRepository.save(member);
-    }
 
     public Long count() {
         Long cnt = postRepository.count();
