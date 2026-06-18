@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Configuration
 @RequiredArgsConstructor
 public class InitData {
+    private final Integer POST_WRITE_POINT = 3;
+    private final Integer COMMENT_WRITE_POINT = 1;
     @Autowired
     @Lazy
     private InitData self;
@@ -46,34 +48,48 @@ public class InitData {
     @Transactional
     public void work2() {
         if(postService.count() > 0) return;
-        Member author1 = memberService.findByReferenceId(4L);
-        Member author2 = memberService.findByReferenceId(5L);
-        Member author3 = memberService.findByReferenceId(6L);
+        Member author1 = memberService.findById(4L);
+        Member author2 = memberService.findById(5L);
+        Member author3 = memberService.findById(6L);
         postService.write("user1의 회고록 1번", "첫번째 프로젝트", author1);
+        author1.addPoint(POST_WRITE_POINT);
         postService.write("user1의 회고록 2번", "두번째 프로젝트", author1);
+        author1.addPoint(POST_WRITE_POINT);
         postService.write("user1의 회고록 3번", "세번째 프로젝트", author1);
+        author1.addPoint(POST_WRITE_POINT);
         postService.write("user2의 회고록 1번", "첫번째 프로젝트", author2);
+        author2.addPoint(POST_WRITE_POINT);
         postService.write("user2의 회고록 2번", "두번째 프로젝트", author2);
+        author2.addPoint(POST_WRITE_POINT);
         postService.write("user3의 회고록 1번", "세번째 프로젝트", author3);
+        author3.addPoint(POST_WRITE_POINT);
     }
 
     @Transactional
     public void work3() {
         if(commentService.count() > 0) return;
-        Member author1 = memberService.findByReferenceId(4L);
-        Member author2 = memberService.findByReferenceId(5L);
-        Member author3 = memberService.findByReferenceId(6L);
+        Member author1 = memberService.findById(4L);
+        Member author2 = memberService.findById(5L);
+        Member author3 = memberService.findById(6L);
         Post post1 = postService.findByReferenceId(1L);
         Post post2 = postService.findByReferenceId(2L);
         Post post3 = postService.findByReferenceId(3L);
         Post post4 = postService.findByReferenceId(4L);
         commentService.write("댓글1", post1, author1);
+        author1.addPoint(COMMENT_WRITE_POINT);
         commentService.write("댓글2", post1, author2);
+        author2.addPoint(COMMENT_WRITE_POINT);
         commentService.write("댓글3", post1, author3);
+        author3.addPoint(COMMENT_WRITE_POINT);
         commentService.write("댓글4", post2, author2);
+        author2.addPoint(COMMENT_WRITE_POINT);
         commentService.write("댓글5", post2, author2);
+        author2.addPoint(COMMENT_WRITE_POINT);
         commentService.write("댓글6", post3, author3);
+        author3.addPoint(COMMENT_WRITE_POINT);
         commentService.write("댓글7", post3, author1);
+        author1.addPoint(COMMENT_WRITE_POINT);
         commentService.write("댓글8", post4, author1);
+        author1.addPoint(COMMENT_WRITE_POINT);
     }
 }
