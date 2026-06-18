@@ -13,8 +13,10 @@ import lombok.NoArgsConstructor;
 public class Member extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String userName;
+
     @Column(nullable = false)
     private String password;
+
     @Column(nullable = false)
     private String nickName;
     //쓸 이유가 없네.. 조회를 하려고해도 한번에 10,000개를 가져오니까 안되고, 삭제를 하려고해도 요즘은 SoftDelete니까 이유가없고,

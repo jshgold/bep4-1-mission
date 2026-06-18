@@ -13,8 +13,10 @@ import lombok.NoArgsConstructor;
 public class Post extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String title;
+
     @Column(nullable = false)
     private String content;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member author;

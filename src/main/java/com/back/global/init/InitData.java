@@ -28,6 +28,7 @@ public class InitData {
         return args -> {
             self.work1();
             self.work2();
+            self.work3();
         };
     }
 

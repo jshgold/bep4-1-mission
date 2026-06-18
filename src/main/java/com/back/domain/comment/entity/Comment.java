@@ -14,9 +14,11 @@ import lombok.NoArgsConstructor;
 public class Comment extends BaseEntity {
     @Column(nullable = false)
     private String content;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id")
     private Post post;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member author;
