@@ -12,8 +12,8 @@ public class PostService {
     private final PostRepository postRepository;
 
 
-    public void create(String title, String content, Member author) {
-        Post post = Post.create(title, content, author);
+    public void write(String title, String content, Member author) {
+        Post post = Post.write(title, content, author);
         Post result = postRepository.save(post);
     }
 
@@ -21,6 +21,11 @@ public class PostService {
     public Long count() {
         Long cnt = postRepository.count();
         return cnt;
+    }
+
+    public Post findByReferenceId(Long referenceId) {
+        Post post = postRepository.getReferenceById(referenceId);
+        return post;
     }
 
 

@@ -19,7 +19,7 @@ public class Post extends BaseEntity {
     @JoinColumn(name = "member_id")
     private Member author;
 
-    public static Post create(String title, String content, Member author) {
+    public static Post write(String title, String content, Member author) {
         Post post = new Post();
         post.title = title;
         post.content = content;

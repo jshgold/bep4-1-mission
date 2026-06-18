@@ -1,7 +1,9 @@
 package com.back.global.init;
 
+import com.back.domain.comment.service.CommentService;
 import com.back.domain.member.entity.Member;
 import com.back.domain.member.service.MemberService;
+import com.back.domain.post.entity.Post;
 import com.back.domain.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ public class InitData {
     private InitData self;
     private final MemberService memberService;
     private final PostService postService;
+    private final CommentService commentService;
 
     @Bean
     ApplicationRunner initDataApplicationRunner() {
@@ -45,11 +48,31 @@ public class InitData {
         Member author1 = memberService.findByReferenceId(4L);
         Member author2 = memberService.findByReferenceId(5L);
         Member author3 = memberService.findByReferenceId(6L);
-        postService.create("user1의 회고록 1번", "첫번째 프로젝트", author1);
-        postService.create("user1의 회고록 2번", "두번째 프로젝트", author1);
-        postService.create("user1의 회고록 3번", "세번째 프로젝트", author1);
-        postService.create("user2의 회고록 1번", "첫번째 프로젝트", author2);
-        postService.create("user2의 회고록 2번", "두번째 프로젝트", author2);
-        postService.create("user3의 회고록 1번", "세번째 프로젝트", author3);
+        postService.write("user1의 회고록 1번", "첫번째 프로젝트", author1);
+        postService.write("user1의 회고록 2번", "두번째 프로젝트", author1);
+        postService.write("user1의 회고록 3번", "세번째 프로젝트", author1);
+        postService.write("user2의 회고록 1번", "첫번째 프로젝트", author2);
+        postService.write("user2의 회고록 2번", "두번째 프로젝트", author2);
+        postService.write("user3의 회고록 1번", "세번째 프로젝트", author3);
+    }
+
+    @Transactional
+    public void work3() {
+        if(commentService.count() > 0) return;
+        Member author1 = memberService.findByReferenceId(4L);
+        Member author2 = memberService.findByReferenceId(5L);
+        Member author3 = memberService.findByReferenceId(6L);
+        Post post1 = postService.findByReferenceId(1L);
+        Post post2 = postService.findByReferenceId(2L);
+        Post post3 = postService.findByReferenceId(3L);
+        Post post4 = postService.findByReferenceId(4L);
+        commentService.write("댓글1", post1, author1);
+        commentService.write("댓글2", post1, author2);
+        commentService.write("댓글3", post1, author3);
+        commentService.write("댓글4", post2, author2);
+        commentService.write("댓글5", post2, author2);
+        commentService.write("댓글6", post3, author3);
+        commentService.write("댓글7", post3, author1);
+        commentService.write("댓글8", post4, author1);
     }
 }
