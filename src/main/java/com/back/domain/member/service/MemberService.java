@@ -4,13 +4,15 @@ import com.back.domain.member.entity.Member;
 import com.back.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;
 
-
+    @Transactional
     public void create() {
         String userName = "";
         String password = "";
@@ -19,6 +21,7 @@ public class MemberService {
         Member result = memberRepository.save(member);
     }
 
+    @Transactional
     public void initCreate(String userName, String nickname) {
         Member member = Member.initCreate(userName, nickname);
         Member result = memberRepository.save(member);

@@ -5,13 +5,15 @@ import com.back.domain.post.entity.Post;
 import com.back.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
 public class PostService {
     private final PostRepository postRepository;
 
-
+    @Transactional
     public void write(String title, String content, Member author) {
         Post post = Post.write(title, content, author);
         Post result = postRepository.save(post);
