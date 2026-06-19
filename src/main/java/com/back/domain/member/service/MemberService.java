@@ -1,10 +1,13 @@
 package com.back.domain.member.service;
 
+import com.back.domain.member.dto.EventDto.PointEvent;
 import com.back.domain.member.entity.Member;
 import com.back.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -25,6 +28,13 @@ public class MemberService {
     public void initCreate(String userName, String nickname) {
         Member member = Member.initCreate(userName, nickname);
         Member result = memberRepository.save(member);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @TransactionalEventListener
+    public void addPoint(PointEvent pointEvent) {
+        Member member = findById(pointEvent.id());
+        member.addPoint(pointEvent.point());
     }
 
     public Long count() {

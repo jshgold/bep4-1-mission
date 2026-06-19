@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.event.TransactionalEventListener;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

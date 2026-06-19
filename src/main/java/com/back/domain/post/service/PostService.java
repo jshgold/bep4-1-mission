@@ -1,9 +1,11 @@
 package com.back.domain.post.service;
 
+import com.back.domain.member.dto.EventDto;
 import com.back.domain.member.entity.Member;
 import com.back.domain.post.entity.Post;
 import com.back.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,11 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PostService {
     private final PostRepository postRepository;
+    private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
     public void write(String title, String content, Member author) {
         Post post = Post.write(title, content, author);
         Post result = postRepository.save(post);
+        eventPublisher.publishEvent(new EventDto.PointEvent(author.getId(), 3));
     }
 
 
