@@ -4,10 +4,10 @@ import com.back.domain.member.dto.EventDto;
 import com.back.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Component
+@Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class PostFacade {
