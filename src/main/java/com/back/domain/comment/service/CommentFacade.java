@@ -20,7 +20,7 @@ public class CommentFacade {
     private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
-    public void writePostAndAddPoint(String content, Post post, Member author) {
+    public void writeCommentAndAddPoint(String content, Post post, Member author) {
         CommentResponseDto responseDto = commentService.write(content, post, author);
         eventPublisher.publishEvent(new CommentWritedEventDto(responseDto));
     }
