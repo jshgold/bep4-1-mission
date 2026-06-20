@@ -1,6 +1,5 @@
 package com.back.domain.post.service;
 
-import com.back.domain.member.dto.EventDto;
 import com.back.domain.member.entity.Member;
 import com.back.domain.post.dto.PostResponseDto;
 import com.back.domain.post.dto.PostWritedEventDto;
