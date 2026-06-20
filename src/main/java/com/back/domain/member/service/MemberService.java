@@ -30,13 +30,6 @@ public class MemberService {
         Member result = memberRepository.save(member);
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    @TransactionalEventListener
-    public void addPoint(PointEvent pointEvent) {
-        Member member = findById(pointEvent.id());
-        member.addPoint(pointEvent.point());
-    }
-
     public Long count() {
         Long cnt = memberRepository.count();
         return cnt;

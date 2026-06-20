@@ -14,13 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class PostService {
     private final PostRepository postRepository;
-    private final ApplicationEventPublisher eventPublisher;
 
     @Transactional
-    public void write(String title, String content, Member author) {
+    public Post write(String title, String content, Member author) {
         Post post = Post.write(title, content, author);
         Post result = postRepository.save(post);
-        eventPublisher.publishEvent(new EventDto.PointEvent(author.getId(), 3));
+        return result;
     }
 
 
