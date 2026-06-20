@@ -2,6 +2,7 @@ package com.back.domain.post.service;
 
 import com.back.domain.member.dto.EventDto;
 import com.back.domain.member.entity.Member;
+import com.back.domain.post.dto.PostResponseDto;
 import com.back.domain.post.entity.Post;
 import com.back.domain.post.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +17,10 @@ public class PostService {
     private final PostRepository postRepository;
 
     @Transactional
-    public Post write(String title, String content, Member author) {
+    public PostResponseDto write(String title, String content, Member author) {
         Post post = Post.write(title, content, author);
         Post result = postRepository.save(post);
-        return result;
+        return PostResponseDto.from(result);
     }
 
 

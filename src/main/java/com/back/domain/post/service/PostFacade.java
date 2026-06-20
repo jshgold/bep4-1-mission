@@ -2,6 +2,8 @@ package com.back.domain.post.service;
 
 import com.back.domain.member.dto.EventDto;
 import com.back.domain.member.entity.Member;
+import com.back.domain.post.dto.PostResponseDto;
+import com.back.domain.post.dto.PostWritedEventDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,7 @@ public class PostFacade {
 
     @Transactional
     public void writePostAndAddPoint(String title, String content, Member author) {
-        postService.write(title, content, author);
-        eventPublisher.publishEvent(new EventDto.PointEvent(author.getId(), 3));
+        PostResponseDto responseDto = postService.write(title, content, author);
+        eventPublisher.publishEvent(new PostWritedEventDto(responseDto));
     }
 }
