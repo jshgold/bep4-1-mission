@@ -1,7 +1,6 @@
 package com.back.domain.member.listener;
 
 import com.back.domain.comment.dto.CommentWritedEventDto;
-import com.back.domain.member.dto.EventDto.*;
 import com.back.domain.member.entity.Member;
 import com.back.domain.member.service.MemberService;
 import com.back.domain.post.dto.PostWritedEventDto;

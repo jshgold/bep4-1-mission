@@ -1,13 +1,10 @@
 package com.back.domain.member.service;
 
-import com.back.domain.member.dto.EventDto.PointEvent;
 import com.back.domain.member.entity.Member;
 import com.back.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.event.TransactionalEventListener;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
